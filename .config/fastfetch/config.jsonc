@@ -1,114 +1,121 @@
-// Load with --config examples/2.jsonc
 {
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+
+  "logo": {
+    "source": "arch",
+    "color": {
+      "1": "red",
+      "2": "red",
+      "3": "red"
+    }
+  },
+
   "display": {
     "separator": " ",
     "color": {
-      "separator": "white"
+      "separator": "red"
     }
   },
-  "modules": [
-    // ── Hardware ──────────────────────────────────
 
+  "modules": [
     {
       "type": "cpu",
       "key": "╭─󰻠 cpu ",
-      "keyColor": "green",
+      "keyColor": "red",
       "showPeCoreCount": true
     },
     {
       "type": "gpu",
       "key": "├─󰍛 gpu ",
-      "keyColor": "green"
+      "keyColor": "red"
     },
     {
       "type": "disk",
       "key": "├─ disk",
-      "keyColor": "green"
+      "keyColor": "red"
     },
     {
       "type": "memory",
       "key": "├─󰑭 ram ",
-      "keyColor": "green",
+      "keyColor": "red",
       "format": "{used} / {total} ({percentage}%)"
     },
     {
       "type": "swap",
       "key": "├─󰓡 swp ",
-      "keyColor": "green"
+      "keyColor": "red"
     },
     {
       "type": "display",
       "key": "╰─󰍹 mon ",
-      "keyColor": "green"
+      "keyColor": "red"
     },
 
     "break",
 
-    // ── Environment ───────────────────────────────
     {
       "type": "shell",
       "key": "╭─ sh  ",
-      "keyColor": "yellow"
+      "keyColor": "red"
     },
     {
       "type": "terminal",
       "key": "├─ term",
-      "keyColor": "yellow"
+      "keyColor": "red"
     },
     {
       "type": "lm",
       "key": "├─󰧨 lm  ",
-      "keyColor": "yellow"
+      "keyColor": "red"
     },
     {
       "type": "de",
       "key": "├─󰻑 de  ",
-      "keyColor": "yellow"
+      "keyColor": "red"
     },
     {
       "type": "wm",
       "key": "╰─󱇛 wm  ",
-      "keyColor": "yellow"
+      "keyColor": "red"
     },
+
     "break",
 
-    // ── System ────────────────────────────────────
     {
       "type": "title",
       "key": "╭─ usr ",
       "format": "{user-name}@{host-name}",
-      "keyColor": "blue"
+      "keyColor": "red"
     },
     {
       "type": "os",
-      "key": "├─{icon} os  ", // replace {icon} with your distro glyph
-      "keyColor": "blue"
+      "key": "├─{icon} os  ",
+      "keyColor": "red"
     },
     {
       "type": "kernel",
       "key": "├─󰇺 krn ",
-      "keyColor": "blue"
+      "keyColor": "red"
     },
     {
       "type": "packages",
       "key": "├─󰏖 pkg ",
-      "keyColor": "blue"
+      "keyColor": "red"
     },
     {
       "type": "uptime",
       "key": "├─󰅐 up  ",
-      "keyColor": "blue"
+      "keyColor": "red"
     },
     {
       "type": "locale",
       "key": "├─󰗊 loc ",
-      "keyColor": "blue"
+      "keyColor": "red"
     },
     {
       "type": "colors",
       "key": "╰─ col ",
-      "keyColor": "blue",
+      "keyColor": "red",
       "symbol": "circle"
     }
   ]
