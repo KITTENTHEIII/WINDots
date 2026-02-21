@@ -1,0 +1,21 @@
+{
+  "workbench.colorTheme": "Scoria",
+  "files.autoSave": "afterDelay",
+  "editor.fontFamily": "FiraCode Nerd Font Mono",
+  "editor.fontLigatures": "'calt' off",
+  "editor.fontVariations": false,
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "json.schemaDownload.trustedDomains": {
+    "https://schemastore.azurewebsites.net/": true,
+    "https://raw.githubusercontent.com/": true,
+    "https://www.schemastore.org/": true,
+    "https://json.schemastore.org/": true,
+    "https://json-schema.org/": true,
+    "https://github.com": true
+  },
+  "workbench.settings.applyToAllProfiles": [
+    "editor.unicodeHighlight.allowedCharacters"
+  ]
+}

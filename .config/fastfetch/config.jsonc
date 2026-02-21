@@ -1,0 +1,115 @@
+// Load with --config examples/2.jsonc
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "display": {
+    "separator": " ",
+    "color": {
+      "separator": "white"
+    }
+  },
+  "modules": [
+    // ── Hardware ──────────────────────────────────
+
+    {
+      "type": "cpu",
+      "key": "╭─󰻠 cpu ",
+      "keyColor": "green",
+      "showPeCoreCount": true
+    },
+    {
+      "type": "gpu",
+      "key": "├─󰍛 gpu ",
+      "keyColor": "green"
+    },
+    {
+      "type": "disk",
+      "key": "├─ disk",
+      "keyColor": "green"
+    },
+    {
+      "type": "memory",
+      "key": "├─󰑭 ram ",
+      "keyColor": "green",
+      "format": "{used} / {total} ({percentage}%)"
+    },
+    {
+      "type": "swap",
+      "key": "├─󰓡 swp ",
+      "keyColor": "green"
+    },
+    {
+      "type": "display",
+      "key": "╰─󰍹 mon ",
+      "keyColor": "green"
+    },
+
+    "break",
+
+    // ── Environment ───────────────────────────────
+    {
+      "type": "shell",
+      "key": "╭─ sh  ",
+      "keyColor": "yellow"
+    },
+    {
+      "type": "terminal",
+      "key": "├─ term",
+      "keyColor": "yellow"
+    },
+    {
+      "type": "lm",
+      "key": "├─󰧨 lm  ",
+      "keyColor": "yellow"
+    },
+    {
+      "type": "de",
+      "key": "├─󰻑 de  ",
+      "keyColor": "yellow"
+    },
+    {
+      "type": "wm",
+      "key": "╰─󱇛 wm  ",
+      "keyColor": "yellow"
+    },
+    "break",
+
+    // ── System ────────────────────────────────────
+    {
+      "type": "title",
+      "key": "╭─ usr ",
+      "format": "{user-name}@{host-name}",
+      "keyColor": "blue"
+    },
+    {
+      "type": "os",
+      "key": "├─{icon} os  ", // replace {icon} with your distro glyph
+      "keyColor": "blue"
+    },
+    {
+      "type": "kernel",
+      "key": "├─󰇺 krn ",
+      "keyColor": "blue"
+    },
+    {
+      "type": "packages",
+      "key": "├─󰏖 pkg ",
+      "keyColor": "blue"
+    },
+    {
+      "type": "uptime",
+      "key": "├─󰅐 up  ",
+      "keyColor": "blue"
+    },
+    {
+      "type": "locale",
+      "key": "├─󰗊 loc ",
+      "keyColor": "blue"
+    },
+    {
+      "type": "colors",
+      "key": "╰─ col ",
+      "keyColor": "blue",
+      "symbol": "circle"
+    }
+  ]
+}
