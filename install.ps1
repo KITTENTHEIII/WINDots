@@ -137,6 +137,9 @@ $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";
             [System.Environment]::GetEnvironmentVariable("Path", "User")
 
 # 13. Copy oh-my-posh theme from repo
+# The profile (copied in steps 7-8) already calls:
+#   oh-my-posh init pwsh --config ~/.config/oh-my-posh/atomicBit.omp.json | Invoke-Expression
+# This step just puts the theme file in the right place.
 Write-Step "Step 13 - Copying oh-my-posh theme from repo"
 $OmpConfigDir = Join-Path $env:USERPROFILE ".config\oh-my-posh"
 if (-not (Test-Path $OmpConfigDir)) {
@@ -153,36 +156,14 @@ if (Test-Path $RepoOhMyPoshFolder) {
     Write-Warn "'$RepoOhMyPoshFolder' not found. Skipping theme copy."
 }
 
-# 14. Wire oh-my-posh init into the PS7 profile (idempotent)
-Write-Step "Step 14 - Wiring oh-my-posh into PowerShell profile"
-
-# Prefer a theme copied from the repo; fall back to the built-in 'jandedobbeleer' theme.
-$OmpTheme = Get-ChildItem -Path $OmpConfigDir -Filter "*.omp.*" -ErrorAction SilentlyContinue |
-            Select-Object -First 1
-
-if ($OmpTheme) {
-    $OmpThemePath = $OmpTheme.FullName
-    Write-OK "Using repo theme: $OmpThemePath"
+# 14. Verify oh-my-posh theme is in place (idempotent check)
+Write-Step "Step 14 - Verifying oh-my-posh theme"
+$OmpThemePath = Join-Path $OmpConfigDir "atomicBit.omp.json"
+if (Test-Path $OmpThemePath) {
+    Write-OK "Theme found: $OmpThemePath"
 } else {
-    # oh-my-posh ships built-in themes; resolve the executable to find them
-    $OmpExe = (Get-Command oh-my-posh -ErrorAction SilentlyContinue)?.Source
-    if ($OmpExe) {
-        $BuiltInThemes = Join-Path (Split-Path $OmpExe) "themes"
-        $OmpThemePath  = Join-Path $BuiltInThemes "jandedobbeleer.omp.json"
-    } else {
-        $OmpThemePath = "jandedobbeleer"   # oh-my-posh accepts a bare name as fallback
-    }
-    Write-Warn "No repo theme found - defaulting to: $OmpThemePath"
-}
-
-$OmpInitLine = "oh-my-posh init pwsh --config `"$OmpThemePath`" | Invoke-Expression"
-$ProfileContent = if (Test-Path $PS7ProfilePath) { Get-Content $PS7ProfilePath -Raw } else { "" }
-
-if ($ProfileContent -match [regex]::Escape("oh-my-posh init pwsh")) {
-    Write-Warn "oh-my-posh init already present in profile - skipping."
-} else {
-    Add-Content -Path $PS7ProfilePath -Value "`n# oh-my-posh prompt`n$OmpInitLine" -Encoding UTF8
-    Write-OK "oh-my-posh init added to profile."
+    Write-Warn "atomicBit.omp.json not found at '$OmpThemePath'."
+    Write-Warn "Ensure your repo's oh-my-posh\ folder contains atomicBit.omp.json."
 }
 
 Write-Host "`nSetup complete!" -ForegroundColor Green
