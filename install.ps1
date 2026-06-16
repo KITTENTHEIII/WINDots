@@ -10,6 +10,7 @@ function Write-Warn { param([string]$Message); Write-Host "    [!!] $Message" -F
 $RepoRoot             = if ($PSScriptRoot) { $PSScriptRoot } else { Get-Location }
 $RepoPowerShellFolder = Join-Path $RepoRoot "PowerShell"
 $RepoFastfetchFolder  = Join-Path $RepoRoot "fastfetch"
+$RepoOhMyPoshFolder   = Join-Path $RepoRoot "oh-my-posh"
 
 # 1. fastfetch
 Write-Step "Step 1 - Installing fastfetch"
@@ -120,6 +121,68 @@ if (Test-Path $ConfigJsonc) {
     }
 } else {
     Write-Warn "config.jsonc not found. Skipping."
+}
+
+# 12. oh-my-posh
+Write-Step "Step 12 - Installing oh-my-posh"
+if ((winget list --id JanDeDobbeleer.OhMyPosh 2>&1) | Select-String "OhMyPosh") {
+    Write-Warn "oh-my-posh already installed - skipping."
+} else {
+    winget install --id JanDeDobbeleer.OhMyPosh -e --accept-source-agreements --accept-package-agreements
+    Write-OK "oh-my-posh installed."
+}
+
+# Refresh PATH so oh-my-posh is available in this session without a restart
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" +
+            [System.Environment]::GetEnvironmentVariable("Path", "User")
+
+# 13. Copy oh-my-posh theme from repo
+Write-Step "Step 13 - Copying oh-my-posh theme from repo"
+$OmpConfigDir = Join-Path $env:USERPROFILE ".config\oh-my-posh"
+if (-not (Test-Path $OmpConfigDir)) {
+    New-Item -ItemType Directory -Path $OmpConfigDir -Force | Out-Null
+    Write-OK "Created: $OmpConfigDir"
+} else {
+    Write-Warn "Already exists: $OmpConfigDir"
+}
+
+if (Test-Path $RepoOhMyPoshFolder) {
+    Copy-Item -Path "$RepoOhMyPoshFolder\*" -Destination $OmpConfigDir -Recurse -Force
+    Write-OK "oh-my-posh config copied to '$OmpConfigDir'."
+} else {
+    Write-Warn "'$RepoOhMyPoshFolder' not found. Skipping theme copy."
+}
+
+# 14. Wire oh-my-posh init into the PS7 profile (idempotent)
+Write-Step "Step 14 - Wiring oh-my-posh into PowerShell profile"
+
+# Prefer a theme copied from the repo; fall back to the built-in 'jandedobbeleer' theme.
+$OmpTheme = Get-ChildItem -Path $OmpConfigDir -Filter "*.omp.*" -ErrorAction SilentlyContinue |
+            Select-Object -First 1
+
+if ($OmpTheme) {
+    $OmpThemePath = $OmpTheme.FullName
+    Write-OK "Using repo theme: $OmpThemePath"
+} else {
+    # oh-my-posh ships built-in themes; resolve the executable to find them
+    $OmpExe = (Get-Command oh-my-posh -ErrorAction SilentlyContinue)?.Source
+    if ($OmpExe) {
+        $BuiltInThemes = Join-Path (Split-Path $OmpExe) "themes"
+        $OmpThemePath  = Join-Path $BuiltInThemes "jandedobbeleer.omp.json"
+    } else {
+        $OmpThemePath = "jandedobbeleer"   # oh-my-posh accepts a bare name as fallback
+    }
+    Write-Warn "No repo theme found - defaulting to: $OmpThemePath"
+}
+
+$OmpInitLine = "oh-my-posh init pwsh --config `"$OmpThemePath`" | Invoke-Expression"
+$ProfileContent = if (Test-Path $PS7ProfilePath) { Get-Content $PS7ProfilePath -Raw } else { "" }
+
+if ($ProfileContent -match [regex]::Escape("oh-my-posh init pwsh")) {
+    Write-Warn "oh-my-posh init already present in profile - skipping."
+} else {
+    Add-Content -Path $PS7ProfilePath -Value "`n# oh-my-posh prompt`n$OmpInitLine" -Encoding UTF8
+    Write-OK "oh-my-posh init added to profile."
 }
 
 Write-Host "`nSetup complete!" -ForegroundColor Green
