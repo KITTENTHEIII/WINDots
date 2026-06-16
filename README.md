@@ -7,3 +7,6 @@
 4. Open a terminal and then click on the arrow and select the "Settings" option.
 
 5. Select Powershell 7 as the default profile & Select Terminal as the default terminal application.
+
+<img width="986" height="435" alt="Step1" src="https://github.com/user-attachments/assets/fde57bcb-8835-435f-bbba-e26a7da56bcd" />
+<img width="991" height="430" alt="Step2" src="https://github.com/user-attachments/assets/227d2051-f93b-4d50-8aae-b90957715245" />
