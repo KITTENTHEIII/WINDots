@@ -1,34 +1,83 @@
-# Automatic installation
+# Installation
 
-1. Run `install.ps1` as a administrator.
+## Automatic
 
-2. In case it tells you to manually edit something it is recommended to read the manual installation guide.
+1. Clone or download this repository.
+2. Right-click `install.ps1` and select **Run as Administrator** (or run it from an elevated PowerShell session).
+3. Follow any on-screen prompts. If the script warns you to manually edit something, refer to the [Manual Installation](#manual-installation) section below.
+4. When the script finishes, open **Windows Terminal → Settings** and:
+   - Set **Default profile** to `PowerShell 7`
+   - Set **Default terminal application** to `Windows Terminal`
 
-3. Open the terminal settings and select `Powershell 7` as the default profile and select `Terminal` for the default terminal application.
+> The script handles everything else — fastfetch, JetBrainsMono Nerd Font, oh-my-posh, and all config files.
 
-# Manual installation
+---
 
-1. Install fastfetch: `winget install fastfetch`
+## Manual Installation
 
-2. Download and install compatible nerd font: `https://www.nerdfonts.com/font-downloads`
+### 1. Install fastfetch
+```powershell
+winget install fastfetch
+```
 
-3. Install Powershell 7: `https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows?view=powershell-7.6`
+### 2. Install a Nerd Font
+Download and install a compatible Nerd Font from [nerdfonts.com](https://www.nerdfonts.com/font-downloads).  
+This config uses **JetBrainsMono Nerd Font**.
 
-4. Open a terminal and then click on the arrow and select the "Settings" option.
+### 3. Install PowerShell 7
+```powershell
+winget install Microsoft.PowerShell
+```
+Or follow the [official guide](https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows).
 
-5. Select Powershell 7 as the default profile & Select Terminal as the default terminal application.
+### 4. Install oh-my-posh
+```powershell
+winget install JanDeDobbeleer.OhMyPosh
+```
 
-<img width="986" height="435" alt="Step1" src="https://github.com/user-attachments/assets/fde57bcb-8835-435f-bbba-e26a7da56bcd" />
-<img width="991" height="430" alt="Step2" src="https://github.com/user-attachments/assets/227d2051-f93b-4d50-8aae-b90957715245" />
+### 5. Configure Windows Terminal
+Open **Windows Terminal**, click the **˅** arrow next to the tabs and select **Settings**.
 
-6. Open a terminal and run the following command: `New-Item -ItemType File -Path $PROFILE -Force` 
+- Under **Startup**, set **Default profile** to `PowerShell 7`
+- Under **Startup**, set **Default terminal application** to `Windows Terminal`
 
-7. Also run the command `$PROFILE` and then copy the path it will give you into file explorer, the will will normally be at `C:\Users\YourUser\Documents\PowerShell\Microsoft.PowerShell_profile.ps1`
+<img width="986" alt="Terminal settings – default profile" src="https://github.com/user-attachments/assets/fde57bcb-8835-435f-bbba-e26a7da56bcd" />
+<img width="991" alt="Terminal settings – default terminal application" src="https://github.com/user-attachments/assets/227d2051-f93b-4d50-8aae-b90957715245" />
 
-8. Download the repository, open the "PowerShell" folder and click to edit the `.ps1` file and copy everything from it, and then paste it inside the path that was given to you when you ran the `$PROFILE` command.
+### 6. Create the PowerShell profile
+Open a PowerShell 7 terminal and run:
+```powershell
+New-Item -ItemType File -Path $PROFILE -Force
+```
+Then run `$PROFILE` to print the path — it will look something like:
+```
+C:\Users\YourUser\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
+```
 
-9. Go to `C:\Users\YourUser` and create a directory named `.config`, open the ".config" directory and then create another directory called `fastfetch`
+### 7. Copy the PowerShell profile
+Open the `PowerShell/` folder from this repository, copy the entire contents of the `.ps1` file, and paste them into the file at the path printed above.
 
-10. Open again the downloaded repository and then copy and paste everything that is inside the "fastfetch" folder into the other fastfetch folder that you created.
+### 8. Set up fastfetch config
+Create the config directory if it does not already exist:
+```powershell
+New-Item -ItemType Directory -Path "$HOME\.config\fastfetch" -Force
+```
+Then copy everything from the `fastfetch/` folder in this repository into that directory.
 
-11. Open `config.jsonc` and edit the line that says `"source": "C:/Users/YourUser/.config/fastfetch/ascii.txt",` changing the username in the path to your windows username.
+### 9. Patch the fastfetch config
+Open `~/.config/fastfetch/config.jsonc` and find the line:
+```
+"source": "C:/Users/YourUser/.config/fastfetch/ascii.txt",
+```
+Replace `YourUser` with your actual Windows username.
+
+### 10. Set up oh-my-posh theme
+Create the config directory:
+```powershell
+New-Item -ItemType Directory -Path "$HOME\.config\oh-my-posh" -Force
+```
+Copy everything from the `oh-my-posh/` folder in this repository into that directory.  
+The profile is already configured to load `atomicBit.omp.json` from that location automatically.
+
+### 11. Restart the terminal
+Close and reopen Windows Terminal. Everything should now be active.
