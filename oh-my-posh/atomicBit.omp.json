@@ -1,0 +1,201 @@
+{
+"$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+"blocks": [
+{
+"alignment": "left",
+"segments": [
+{
+"style": "plain",
+"template": "╭─[<#60A5FA>{{ .UserName }}</><#60A5FA>@</><#60A5FA>{{ .HostName }}</>]─",
+"type": "session"
+},
+{
+"foreground": "#60A5FA",
+"style": "plain",
+"template": "<#E2E8F0>[</>{{ .Path }}<#E2E8F0>]</>",
+"type": "path"
+},
+{
+"foreground": "#60A5FA",
+"style": "plain",
+"template": "<#E2E8F0>─(</>#<#E2E8F0>)</>",
+"type": "root"
+}
+],
+"type": "prompt"
+},
+{
+"alignment": "right",
+"segments": [
+{
+"foreground": "#60A5FA",
+"options": {
+"fetch_package_manager": true,
+"npm_icon": "  ",
+"yarn_icon": "  "
+},
+"style": "plain",
+"template": "<#E2E8F0>(</>{{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }}<#E2E8F0>)</>",
+"type": "node"
+},
+{
+"foreground": "#60A5FA",
+"style": "plain",
+"template": "<#E2E8F0>(</>{{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}<#E2E8F0>)</>",
+"type": "python"
+},
+{
+"foreground": "#60A5FA",
+"style": "plain",
+"template": "<#E2E8F0>(</>{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}<#E2E8F0>)</>",
+"type": "java"
+},
+{
+"foreground": "#60A5FA",
+"style": "plain",
+"template": "<#E2E8F0>(</>{{ if .Unsupported }}{{ else }}{{ .Full }}{{ end }}<#E2E8F0>)</>",
+"type": "dotnet"
+},
+{
+"foreground": "#60A5FA",
+"style": "plain",
+"template": "<#E2E8F0>(</>{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}<#E2E8F0>)</>",
+"type": "go"
+},
+{
+"foreground": "#60A5FA",
+"style": "plain",
+"template": "<#E2E8F0>(</>{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}<#E2E8F0>)</>",
+"type": "rust"
+},
+{
+"foreground": "#60A5FA",
+"style": "plain",
+"template": "<#E2E8F0>(</>{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}<#E2E8F0>)</>",
+"type": "dart"
+},
+{
+"foreground": "#60A5FA",
+"style": "plain",
+"template": "<#E2E8F0>(</>{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}<#E2E8F0>)</>",
+"type": "angular"
+},
+{
+"foreground": "#60A5FA",
+"style": "plain",
+"template": "<#E2E8F0>(</>{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}<#E2E8F0>)</>",
+"type": "aurelia"
+},
+{
+"foreground": "#60A5FA",
+"style": "plain",
+"template": "<#1E3A8A>(</>{{ if .Error }}{{ .Error }}{{ else }}Nx {{ .Full }}{{ end }}<#1E3A8A>)</>",
+"type": "nx"
+},
+{
+"foreground": "#60A5FA",
+"style": "plain",
+"template": "<#E2E8F0>(</>{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}<#E2E8F0>)</>",
+"type": "julia"
+},
+{
+"foreground": "#60A5FA",
+"style": "plain",
+"template": "<#E2E8F0>(</>{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}<#E2E8F0>)</>",
+"type": "ruby"
+},
+{
+"foreground": "#60A5FA",
+"style": "plain",
+"template": "<#E2E8F0>(</>{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}<#E2E8F0>)</>",
+"type": "azfunc"
+},
+{
+"foreground": "#60A5FA",
+"style": "plain",
+"template": "<#E2E8F0>(</>{{.Profile}}{{if .Region}}@{{.Region}}{{end}}<#E2E8F0>)</>",
+"type": "aws"
+},
+{
+"foreground": "#60A5FA",
+"style": "plain",
+"template": "<#E2E8F0>(</>{{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}}<#E2E8F0>)</>",
+"type": "kubectl"
+},
+{
+"foreground": "#60A5FA",
+"options": {
+"linux": "",
+"macos": "",
+"windows": "󰍲"
+},
+"style": "plain",
+"template": "<#E2E8F0>(</>{{ if .WSL }}WSL at {{ end }}{{.Icon}}<#E2E8F0>)─</>",
+"type": "os"
+},
+{
+"foreground": "#60A5FA",
+"foreground_templates": [
+  "{{if eq 'Charging' .State.String}}#60A5FA{{end}}",
+  "{{if eq 'Discharging' .State.String}}#93C5FD{{end}}",
+  "{{if eq 'Full' .State.String}}#60A5FA{{end}}"
+],
+"options": {
+"charged_icon": " ",
+"charging_icon": "󰂄 ",
+"discharging_icon": "󰁹 "
+},
+"style": "plain",
+"template": "<#E2E8F0>[</>{{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}{{ .Error }}%<#E2E8F0>]</>",
+"type": "battery"
+},
+{
+"foreground": "#60A5FA",
+"options": {
+"time_format": "_2,15:04"
+},
+"style": "plain",
+"template": "<#E2E8F0>[</> {{ .CurrentDate | date .Format }}<#E2E8F0>]</>",
+"type": "time"
+}
+],
+"type": "prompt"
+},
+{
+"alignment": "left",
+"newline": true,
+"segments": [
+{
+"style": "plain",
+"template": "╰─",
+"type": "text"
+},
+{
+"foreground": "#60A5FA",
+"options": {
+"branch_icon": " ",
+"fetch_status": true,
+"fetch_upstream_icon": true
+},
+"style": "plain",
+"template": "<#E2E8F0>[</>{{ .HEAD }}{{ if .Staging.Changed }}<#60A5FA> ● {{ .Staging.String }}</>{{ end }}{{ if .Working.Changed }}<#93C5FD> ● {{ .Working.String }}</>{{ end }}<#E2E8F0>]-</>",
+"type": "git"
+},
+{
+"foreground": "#60A5FA",
+"foreground_templates": [
+"{{ if gt .Code 0 }}#EF4444{{ end }}"
+],
+"options": {
+"always_enabled": true
+},
+"style": "plain",
+"template": " ",
+"type": "status"
+}
+],
+"type": "prompt"
+}
+],
+"version": 4
+}
