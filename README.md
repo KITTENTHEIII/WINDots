@@ -10,3 +10,15 @@
 
 <img width="986" height="435" alt="Step1" src="https://github.com/user-attachments/assets/fde57bcb-8835-435f-bbba-e26a7da56bcd" />
 <img width="991" height="430" alt="Step2" src="https://github.com/user-attachments/assets/227d2051-f93b-4d50-8aae-b90957715245" />
+
+6. Open a terminal and run the following command: `New-Item -ItemType File -Path $PROFILE -Force` 
+
+7. Also run the command `$PROFILE` and then copy the path it will give you into file explorer, the will will normally be at `C:\Users\YourUser\Documents\PowerShell\Microsoft.PowerShell_profile.ps1`
+
+8. Download the repository, open the "PowerShell" folder and click to edit the `.ps1` file and copy everything from it, and then paste it inside the path that was given to you when you ran the `$PROFILE` command.
+
+9. Go to `C:\Users\YourUser` and create a directory named `.config`, open the ".config" directory and then create another directory called `fastfetch`
+
+10. Open again the downloaded repository and then copy and paste everything that is inside the "fastfetch" folder into the other fastfetch folder that you created.
+
+11. Open `config.jsonc` and edit the line that says `"source": "C:/Users/YourUser/.config/fastfetch/ascii.txt",` changing the username in the path to your windows username.
