@@ -1,4 +1,4 @@
-# Installation
+# Automatic Installation [Recommended]
 
 ## Automatic
 
