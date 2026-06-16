@@ -1,3 +1,5 @@
+# Manual installation
+
 1. Install fastfetch: `winget install fastfetch`
 
 2. Download and install compatible nerd font: `https://www.nerdfonts.com/font-downloads`
