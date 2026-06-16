@@ -92,3 +92,7 @@ Make sure GlazeWM + YASB are both running.
 ### 8. Restart terminal
 
 Close and reopen Windows Terminal. Everything should now be active.
+
+<img width="2560" height="1440" alt="{28C78452-630F-4449-A87B-E55AF4BEFB34}" src="https://github.com/user-attachments/assets/158aaf85-f560-42d2-8f69-223de7676969" />
+
+<img width="2560" height="1440" alt="{3D7FCDAC-37F2-40D7-9C5D-4AAB5598ECD4}" src="https://github.com/user-attachments/assets/1517726e-cd74-4d12-a881-a17f5c5affdd" />
