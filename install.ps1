@@ -166,4 +166,43 @@ if (Test-Path $OmpThemePath) {
     Write-Warn "Ensure your repo's oh-my-posh\ folder contains atomicBit.omp.json."
 }
 
+# 15. Copy yasb to .config\yasb
+Write-Step "Step 15 - Copying yasb config from repo"
+$YasbDir = Join-Path $env:USERPROFILE ".config\yasb"
+if (-not (Test-Path $YasbDir)) {
+    New-Item -ItemType Directory -Path $YasbDir -Force | Out-Null
+    Write-OK "Created: $YasbDir"
+} else {
+    Write-Warn "Already exists: $YasbDir"
+}
+
+$RepoYasbFolder = Join-Path $RepoRoot "yasb"
+if (Test-Path $RepoYasbFolder) {
+    Copy-Item -Path "$RepoYasbFolder\*" -Destination $YasbDir -Recurse -Force
+    Write-OK "yasb config copied to '$YasbDir'."
+} else {
+    Write-Warn "'$RepoYasbFolder' not found. Skipping."
+}
+
+# 16. Copy glazewm to .glzr\glazewm
+Write-Step "Step 16 - Copying glazewm config from repo"
+$GlzrDir    = Join-Path $env:USERPROFILE ".glzr"
+$GlazewmDir = Join-Path $GlzrDir "glazewm"
+foreach ($Dir in @($GlzrDir, $GlazewmDir)) {
+    if (-not (Test-Path $Dir)) {
+        New-Item -ItemType Directory -Path $Dir -Force | Out-Null
+        Write-OK "Created: $Dir"
+    } else {
+        Write-Warn "Already exists: $Dir"
+    }
+}
+
+$RepoGlazewmFolder = Join-Path $RepoRoot "glazewm"
+if (Test-Path $RepoGlazewmFolder) {
+    Copy-Item -Path "$RepoGlazewmFolder\*" -Destination $GlazewmDir -Recurse -Force
+    Write-OK "glazewm config copied to '$GlazewmDir'."
+} else {
+    Write-Warn "'$RepoGlazewmFolder' not found. Skipping."
+}
+
 Write-Host "`nSetup complete!" -ForegroundColor Green
