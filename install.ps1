@@ -12,24 +12,6 @@ $RepoPowerShellFolder = Join-Path $RepoRoot "PowerShell"
 $RepoFastfetchFolder  = Join-Path $RepoRoot "fastfetch"
 $RepoOhMyPoshFolder   = Join-Path $RepoRoot "oh-my-posh"
 
-# Flow Launcher
-Write-Step "Installing Flow Launcher"
-if ((winget list --id FlowLauncher.FlowLauncher 2>&1) | Select-String "Flow Launcher") {
-    Write-Warn "Flow Launcher already installed - skipping."
-} else {
-    winget install --id FlowLauncher.FlowLauncher -e --accept-source-agreements --accept-package-agreements
-    Write-OK "Flow Launcher installed."
-}
-
-# GlazeWM (without Zebar)
-Write-Step "Installing GlazeWM"
-if ((winget list --id glzr.GlazeWM 2>&1) | Select-String "GlazeWM") {
-    Write-Warn "GlazeWM already installed - skipping."
-} else {
-    winget install --id glzr.GlazeWM -e --accept-source-agreements --accept-package-agreements
-    Write-OK "GlazeWM installed."
-}
-
 # 1. fastfetch
 Write-Step "Step 1 - Installing fastfetch"
 if ((winget list --id Fastfetch-cli.Fastfetch 2>&1) | Select-String "Fastfetch") {
@@ -185,21 +167,20 @@ if (Test-Path $OmpThemePath) {
 }
 
 # 15. Copy yasb to .config\yasb
-Write-Step "Step 15 - Copying yasb config from repo"
+Write-Step "Copying YASB config"
 $YasbDir = Join-Path $env:USERPROFILE ".config\yasb"
+
 if (-not (Test-Path $YasbDir)) {
     New-Item -ItemType Directory -Path $YasbDir -Force | Out-Null
     Write-OK "Created: $YasbDir"
-} else {
-    Write-Warn "Already exists: $YasbDir"
 }
 
 $RepoYasbFolder = Join-Path $RepoRoot "yasb"
 if (Test-Path $RepoYasbFolder) {
     Copy-Item -Path "$RepoYasbFolder\*" -Destination $YasbDir -Recurse -Force
-    Write-OK "yasb config copied to '$YasbDir'."
+    Write-OK "YASB config copied."
 } else {
-    Write-Warn "'$RepoYasbFolder' not found. Skipping."
+    Write-Warn "YASB folder not found in repo."
 }
 
 # 16. Copy glazewm to .glzr\glazewm
