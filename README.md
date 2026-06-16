@@ -28,13 +28,18 @@ winget install JanDeDobbeleer.OhMyPosh
 - Set Default terminal application → Windows Terminal
 
 ### 3. Create PowerShell profile
+```powershell
 New-Item -ItemType File -Path $PROFILE -Force
 $PROFILE
+```
 
 Open the printed file path and paste the provided PowerShell profile from this repo.
 
 ### 4. Fastfetch setup
+
+```powershell
 New-Item -ItemType Directory -Path "$HOME\.config\fastfetch" -Force
+```
 
 Copy the fastfetch/ folder from this repo into:
 
@@ -47,7 +52,10 @@ Then edit:
 Replace YourUser with your Windows username.
 
 ### 5. Oh My Posh setup
+
+```powershell
 New-Item -ItemType Directory -Path "$HOME\.config\oh-my-posh" -Force
+```
 
 Copy the oh-my-posh/ folder from this repo into:
 
@@ -57,7 +65,9 @@ Copy the oh-my-posh/ folder from this repo into:
 
 Install:
 
+```powershell
 winget install GlazeWM
+```
 
 Copy your config into:
 
@@ -69,7 +79,9 @@ Restart GlazeWM after changes.
 
 Install:
 
+```powershell
 winget install AmN.yasb
+```
 
 Copy config into:
 
