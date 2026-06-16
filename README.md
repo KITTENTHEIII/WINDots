@@ -4,6 +4,8 @@
 
 2. In case it tells you to manually edit something it is recommended to read the manual installation guide.
 
+3. Open the terminal settings and select `Powershell 7` as the default profile and select `Terminal` for the default terminal application.
+
 # Manual installation
 
 1. Install fastfetch: `winget install fastfetch`
