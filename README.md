@@ -1,3 +1,9 @@
+# Automatic installation
+
+1. Run `install.ps1` as a administrator.
+
+2. In case it tells you to manually edit something it is recommended to read the manual installation guide.
+
 # Manual installation
 
 1. Install fastfetch: `winget install fastfetch`
